@@ -5,7 +5,7 @@
 @endsection
 
 @section('breadcrumbs')
-    Breadcrumbs
+    {{ Breadcrumbs::render('dashboard_home') }}
 @endsection
 
 @section('content')
