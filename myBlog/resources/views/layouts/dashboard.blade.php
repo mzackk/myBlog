@@ -55,6 +55,9 @@
    <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
    <!-- my-dashboard -->
    <script src="{{ asset('vendor/my-dashboard/js/dashboard.js') }}"></script>
+
+   <!-- fontawesome -->
+   <script src="{{ asset('vendor/fontawesome-free/js/all.min.js') }}"></script>
 </body>
 
 </html>
