@@ -38,6 +38,10 @@
           <div class="card-body">
              <ul class="list-group list-group-flush">
                 <!-- list category -->
+                  @include('categories._category-list',[
+                     'categories' => $categories,
+                     'count' => 0
+                  ])
              </ul>
           </div>
        </div>
