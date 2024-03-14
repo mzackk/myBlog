@@ -1,6 +1,6 @@
 <?php
 /*
-language : Indonesia
+language : Malaysia
 */
 return [
     'title' => [
