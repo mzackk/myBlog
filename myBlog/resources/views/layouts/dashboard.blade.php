@@ -60,6 +60,10 @@
    <script src="{{ asset('vendor/my-dashboard/js/dashboard.js') }}"></script>
    <!-- fontawesome -->
    <script src="{{ asset('vendor/fontawesome-free/js/all.min.js') }}"></script>
+
+
+   @include('sweetalert::alert')
+
    {{-- javascript:external --}}
    @stack('javascript-external')
    @stack('javascript-internal')
