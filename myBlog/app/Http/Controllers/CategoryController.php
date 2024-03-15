@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class CategoryController extends Controller
 {
@@ -41,13 +42,23 @@ class CategoryController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        $request->validate([
-            'title' => 'required|string|max:60',
-            'slug' => 'required|string|unique:categories,slug',
-            'thumbnail' => 'required',
-            'description' => 'required|string|max:240',
-        ]);
+    {        
+        $validator = Validator::make($request -> all(),[
+        'title' => 'required|string|max:60',
+        'slug' => 'required|string|unique:categories,slug',
+        'thumbnail' => 'required',
+        'description' => 'required|string|max:240',]);
+
+        if($validator->fails()){
+                if($request->has('parent_category')){
+                    $request['parent_category'] = Category::select('id','title')->find($request->parent_category);
+            }
+            return redirect()->back()->withInput($request->all())->withErrors($validator);
+        }
+
+
+        //process insert data
+        dd("process insert data", $request->all());
     }
 
     /**
