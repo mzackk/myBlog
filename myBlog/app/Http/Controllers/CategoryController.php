@@ -43,6 +43,7 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {        
+        // validation process categories data
         $validator = Validator::make($request -> all(),[
         'title' => 'required|string|max:60',
         'slug' => 'required|string|unique:categories,slug',
@@ -60,10 +61,26 @@ class CategoryController extends Controller
             }
             return redirect()->back()->withInput($request->all())->withErrors($validator);
         }
+            
+        // insert data categories
+        try {
+            Category::create([
+                'title' => $request->title, 
+                'slug' => $request->slug, 
+                'thumbnail' => parse_url($request->thumbnail)['path'], 
+                'description' => $request->description, 
+                'parent_id' => $request->parent_category
+            ]);
+            return redirect()->route('categories.index');
 
+        } catch (\Throwable $th) {
+            if($request->has('parent_category')){
+                $request['parent_category'] = Category::select('id','title')->find($request->parent_category);
 
-        //process insert data
-        dd("process insert data", $request->all());
+        }
+
+        return redirect()->back()->withInput($request->all())->withErrors($validator);
+        }
     }
 
     /**
