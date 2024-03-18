@@ -86,7 +86,7 @@ class CategoryController extends Controller
             trans('categories.alert.create.title'), 
             trans('categories.alert.create.message.error', ['error' => $th->getMessage()]) 
             );
-        return redirect()->back()->withInput($request->all())->withErrors($validator);
+        return redirect()->back()->withInput($request->all());
         }
     }
 
@@ -127,11 +127,34 @@ class CategoryController extends Controller
                     if($request->has('parent_category')){
                         $request['parent_category'] = Category::select('id','title')->find($request->parent_category);
                 }
-                return redirect()->back()->withInput($request->all())->withErrors($validator);
+                return redirect()->back()->withInput($request->all());
             }
                 
-
-            
+            // update data categories
+            try {
+                $category ->update([
+                    'title' => $request->title, 
+                    'slug' => $request->slug, 
+                    'thumbnail' => parse_url($request->thumbnail)['path'], 
+                    'description' => $request->description, 
+                    'parent_id' => $request->parent_category
+                ]);
+                Alert::success(
+                    trans('categories.alert.update.title'), 
+                    trans('categories.alert.update.message.success') );
+                return redirect()->route('categories.index');
+    
+            } catch (\Throwable $th) {
+                if($request->has('parent_category')){
+                    $request['parent_category'] = Category::select('id','title')->find($request->parent_category);
+    
+            }
+            Alert::error(
+                trans('categories.alert.update.title'), 
+                trans('categories.alert.update.message.error', ['error' => $th->getMessage()]) 
+                );
+            return redirect()->back()->withInput($request->all());
+            }
 
 
        
