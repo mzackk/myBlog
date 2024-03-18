@@ -27,10 +27,18 @@ Breadcrumbs::for('categories', function (BreadcrumbTrail $trail) {
 
 });
 
-//Dashboard > Categories > Add
-Breadcrumbs::for('add_category', function (BreadcrumbTrail $trail) {
+//Dashboard > Categories > Edit
+Breadcrumbs::for('edit_category', function (BreadcrumbTrail $trail, $category) {
    $trail->parent('categories');
-   $trail->push('Add', route('categories.create'));
+   $trail->push('Edit', route('categories.edit', ['category' => $category]));
+
+});
+
+
+//Dashboard > Categories > Edit > [title]
+Breadcrumbs::for('edit_category_title', function (BreadcrumbTrail $trail, $category) {
+   $trail->parent('edit_category', $category);
+   $trail->push($category->title, route('categories.edit', ['category' => $category]));
 
 });
 
