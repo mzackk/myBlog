@@ -18,6 +18,9 @@
 
       {{-- css:external --}}
       @stack('css-external')
+
+      {{-- css:external --}}
+      @stack('css-internal')
 </head>
 
 <body>
