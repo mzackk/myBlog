@@ -93,7 +93,7 @@
                 <div class="float-right">
                 	<a class="btn btn-warning px-4" href="{{ route('categories.index') }}">
                         {{ trans('categories.button.back.value') }}</a>
-                	<button type="submit" class="btn btn-primary px-4">{{ trans('categories.button.save.value') }}</button>
+                	<button type="submit" class="btn btn-primary px-4">{{ trans('categories.button.edit.value') }}</button>
                 </div>                
              </form>
           </div>
