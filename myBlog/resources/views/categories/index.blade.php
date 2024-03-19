@@ -69,7 +69,7 @@ $(document).ready(function() {
     }).then((result) => {
       if (result.isConfirmed) {
         // todo: process of deleting categories
-        alert('Testing')
+        event.target.submit();
       }
     });
   });
