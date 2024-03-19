@@ -16,9 +16,11 @@
           <div class="card-header">
             <div class="row">
                 <div class="col-md-6">
-                   <form action="" method="GET">
+                  {{-- Form: search --}}
+                   <form action="{{ route('categories.index') }}" method="GET">
                       <div class="input-group">
-                         <input name="keyword" type="search" class="form-control" placeholder="{{ trans('categories.form_control.input.search.placeholder') }}">
+                         <input name="keyword" type="search" class="form-control" placeholder="{{ trans('categories.form_control.input.search.placeholder') }}" 
+                                 value="{{ request()->get('keyword') }}">
                          <div class="input-group-append">
                             <button class="btn btn-primary" type="submit">
                                <i class="fas fa-search"></i>
@@ -68,7 +70,6 @@ $(document).ready(function() {
       confirmButtonText: $(this).attr('alert-btn-yes'),
     }).then((result) => {
       if (result.isConfirmed) {
-        // todo: process of deleting categories
         event.target.submit();
       }
     });
