@@ -82,7 +82,7 @@ Breadcrumbs::for('add_tag', function (BreadcrumbTrail $trail) {
 //Dashboard > Tags > Edit > [title]
 Breadcrumbs::for('edit_tag', function (BreadcrumbTrail $trail, $tag) {
    $trail->parent('tags');
-   $trail->push('Edit', route('tags.create', ['tag' => $tag]));
+   $trail->push('Edit', route('tags.edit', ['tag' => $tag]));
    $trail->push($tag->title, route('tags.edit', ['tag' => $tag]));
 
 });
