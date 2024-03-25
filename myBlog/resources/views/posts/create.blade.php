@@ -128,6 +128,11 @@
   </div>
 @endsection
 
+{{-- file manager --}}
+@push('javascript-external')
+    <script src="{{ asset('vendor/laravel-filemanager/js/stand-alone-button.js') }}"></script>
+@endpush
+
 @push('javascript-internal')
 
    <script>
@@ -143,6 +148,9 @@
       .replace(/^-|-$/g, "")
   );
 });
+
+   // Event : input thumbnail
+      $('#button_post_thumbnail').filemanager('image');
 
       });
    </script>
