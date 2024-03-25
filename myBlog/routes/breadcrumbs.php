@@ -87,6 +87,13 @@ Breadcrumbs::for('edit_tag', function (BreadcrumbTrail $trail, $tag) {
 
 });
 
+//Dashboard > Posts
+Breadcrumbs::for('posts', function (BreadcrumbTrail $trail) {
+   $trail->parent('dashboard');
+   $trail->push('Posts', route('posts.index'));
+
+});
+
 // Home > Blog
 // Breadcrumbs::for('blog', function (BreadcrumbTrail $trail) {
 //     $trail->parent('home');
