@@ -94,6 +94,13 @@ Breadcrumbs::for('posts', function (BreadcrumbTrail $trail) {
 
 });
 
+//Dashboard > Tags > Add
+Breadcrumbs::for('add_post', function (BreadcrumbTrail $trail) {
+   $trail->parent('posts');
+   $trail->push('Add', route('posts.create'));
+
+});
+
 // Home > Blog
 // Breadcrumbs::for('blog', function (BreadcrumbTrail $trail) {
 //     $trail->parent('home');

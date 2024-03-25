@@ -14,7 +14,7 @@
              {{ trans('dashboard.menu.master') }}
           </div>
           {{-- link:posts --}}
-          <a class="nav-link {{ set_active(['posts.index']) }}" 
+          <a class="nav-link {{ set_active(['posts.index', 'posts.create']) }}" 
             href="{{ route('posts.index') }}">
              <div class="sb-nav-link-icon">
                 <i class="far fa-newspaper"></i>
