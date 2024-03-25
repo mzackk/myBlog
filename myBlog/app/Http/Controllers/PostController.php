@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use App\Models\Category;
 
 class PostController extends Controller
 {
@@ -21,7 +22,9 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('posts.create');
+        return view('posts.create', [
+            'categories' => Category::with('descendants')->onlyParent()->get()
+        ]);
         
     }
 
