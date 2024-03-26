@@ -22,7 +22,7 @@
                          <label for="input_post_title" class="font-weight-bold">
                             {{ trans('posts.form_control.input.title.label') }}
                          </label>
-                         <input id="input_post_title" value="" name="title" type="text"  class="form-control @error('title') is-invalid @enderror"
+                         <input id="input_post_title" value="{{ old('title') }}" name="title" type="text"  class="form-control @error('title') is-invalid @enderror"
                             placeholder="{{ trans('posts.form_control.input.title.placeholder') }}" />
                             @error('title')
                                 <span class="invalid-feedback">
@@ -37,7 +37,7 @@
                          <label for="input_post_slug" class="font-weight-bold">
                             {{ trans('posts.form_control.input.slug.label') }}
                          </label>
-                         <input id="input_post_slug" value="" name="slug" type="text" class="form-control @error('slug') is-invalid @enderror" 
+                         <input id="input_post_slug" value="{{ old('slug') }}" name="slug" type="text" class="form-control @error('slug') is-invalid @enderror" 
                            placeholder="{{ trans('posts.form_control.input.slug.placeholder') }} "
                             readonly />
                             @error('slug')
@@ -60,7 +60,7 @@
                                   {{ trans('posts.button.browse.value') }}
                                </button>
                             </div>
-                            <input id="input_post_thumbnail" name="thumbnail" value="" type="text" class="form-control @error('thumbnail') is-invalid @enderror"
+                            <input id="input_post_thumbnail" name="thumbnail" value="{{ old('thumbnail') }}" type="text" class="form-control @error('thumbnail') is-invalid @enderror"
                                placeholder="{{ trans('posts.form_control.input.thumbnail.placeholder') }}" readonly />
                                @error('thumbnail')
                                 <span class="invalid-feedback">
@@ -77,7 +77,7 @@
                             {{ trans('posts.form_control.textarea.description.label') }}
                          </label>
                          <textarea id="input_post_description" name="description" placeholder="{{ trans('posts.form_control.textarea.description.placeholder') }}" class="form-control @error('description') is-invalid @enderror"
-                            rows="3"></textarea>
+                            rows="3">{{ old('description') }}</textarea>
                             @error('description')
                                 <span class="invalid-feedback">
                                     <strong>
@@ -93,7 +93,7 @@
                          </label>
                          <textarea id="input_post_content" name="content" placeholder="{{ trans('posts.form_control.textarea.content.placeholder') }}" class="form-control 
                          @error('content') is-invalid @enderror"
-                            rows="20"></textarea>
+                            rows="20">{{ old('content') }}</textarea>
                             @error('content')
                                 <span class="invalid-feedback">
                                     <strong>
@@ -133,8 +133,13 @@
                          <label for="select_post_tag" class="font-weight-bold ">
                             {{ trans('posts.form_control.select.tag.label') }}
                          </label>
-                         <select id="select_post_tag" name="tag" data-placeholder="" class="custom-select w-100 @error('tag') is-invalid @enderror"
+                         <select id="select_post_tag" name="tag[]" data-placeholder="" class="custom-select w-100 @error('tag') is-invalid @enderror"
                             multiple>
+                            @if (old('tag'))
+                                @foreach (old('tag') as $tag)
+                                    <option value="{{ $tag->id }}" selected>{{ $tag->title }}</option>
+                                @endforeach
+                            @endif
                          </select>
                          @error('tag')
                                 <span class="invalid-feedback">
@@ -151,7 +156,7 @@
                          </label>
                          <select id="select_post_status" name="status" class="custom-select @error('status') is-invalid @enderror">
                            @foreach ($statuses as $key => $value)
-                           <option value="{{ $key }}">{{ $value }}</option>
+                           <option value="{{ $key }}" {{ old('status') == $key ? "selected" : NULL }}>{{ $value }}</option>
                            @endforeach
                          </select>
                          @error('status')
