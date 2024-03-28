@@ -104,6 +104,13 @@
                 @endforelse
              </ul>
           </div>
+          @if ($posts->hasPages())
+              <div class="card-footer">
+               {{ $posts->links('vendor.pagination.bootstrap-4') }}
+              </div>
+          @else
+              
+          @endif
        </div>
     </div>
   </div>
