@@ -94,7 +94,7 @@ Breadcrumbs::for('posts', function (BreadcrumbTrail $trail) {
 
 });
 
-//Dashboard > Tags > Add
+//Dashboard > Posts > Add
 Breadcrumbs::for('add_post', function (BreadcrumbTrail $trail) {
    $trail->parent('posts');
    $trail->push('Add', route('posts.create'));
@@ -114,6 +114,13 @@ Breadcrumbs::for('edit_post', function (BreadcrumbTrail $trail, $post) {
    $trail->parent('posts');
    $trail->push('Edit', route('posts.edit', ['post' => $post]));
    $trail->push($post->title, route('posts.edit',['post' => $post]));
+
+});
+
+//Dashboard > File Manager
+Breadcrumbs::for('file_manager', function (BreadcrumbTrail $trail) {
+   $trail->parent('dashboard');
+   $trail->push('File Manager', route('filemanager.index'));
 
 });
 
