@@ -124,6 +124,13 @@ Breadcrumbs::for('file_manager', function (BreadcrumbTrail $trail) {
 
 });
 
+//Dashboard > Roles
+Breadcrumbs::for('roles', function (BreadcrumbTrail $trail) {
+   $trail->parent('dashboard');
+   $trail->push('Roles', route('posts.index'));
+
+});
+
 // Home > Blog
 // Breadcrumbs::for('blog', function (BreadcrumbTrail $trail) {
 //     $trail->parent('home');
