@@ -131,6 +131,13 @@ Breadcrumbs::for('roles', function (BreadcrumbTrail $trail) {
 
 });
 
+//Dashboard > Roles > Add
+Breadcrumbs::for('add_roles', function (BreadcrumbTrail $trail) {
+   $trail->parent('roles');
+   $trail->push('Add', route('roles.create'));
+
+});
+
 //Dashboard > Roles > Detail > [name]
 Breadcrumbs::for('detail_role', function (BreadcrumbTrail $trail, $role) {
    $trail->parent('roles');
