@@ -49,7 +49,7 @@
              {{ trans('dashboard.link.users') }}
           </a>
           {{-- Link:Roles --}}
-          <a class="nav-link {{ set_active(['roles.index', 'roles.show' ]) }}" 
+          <a class="nav-link {{ set_active(['roles.index', 'roles.show', 'roles.edit' ]) }}" 
             href="{{ route('roles.index') }}">
              <div class="sb-nav-link-icon">
                 <i class="fas fa-user-shield"></i>
