@@ -140,7 +140,7 @@ class RoleController extends Controller
      */
     public function destroy(Role $role)
     {
-        //
+        dd($role);
     }
 
     private function attributes()
