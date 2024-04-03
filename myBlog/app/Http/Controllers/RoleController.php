@@ -13,10 +13,16 @@ class RoleController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        $roles = [];
+        if($request-> has('keyword')){
+            $roles= Role::where('name', 'LIKE', "%{$request->keyword}%")->get();
+        }else{
+            $roles = Role::all();
+        }
         return view('roles.index',[
-            'roles' => Role::all()
+            'roles' => $roles
         ]);
     }
 
