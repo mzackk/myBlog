@@ -78,12 +78,13 @@
                      </strong>
                    </p>
                @endforelse
-
-
-
-                      <!-- list role -->
              </ul>
           </div>
+          @if ($roles->hasPages())
+              <div class="card-footer">
+                  {{ $roles->links('vendor.pagination.bootstrap-4') }}
+              </div>
+          @endif
        </div>
     </div>
  </div>
