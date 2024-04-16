@@ -20,7 +20,7 @@
                    <label for="input_user_name" class="font-weight-bold">
                       {{ trans('users.form_control.input.name.label') }}
                    </label>
-                   <input id="input_user_name" value="" name="name" type="text" class="form-control @error('name') is-invalid @enderror"
+                   <input id="input_user_name" value="{{ old('name') }}" name="name" type="text" class="form-control @error('name') is-invalid @enderror"
                    placeholder="{{ trans('users.form_control.input.name.placeholder') }}" />
                    @error('name')
                     <span class="invalid-feedback">
@@ -37,6 +37,11 @@
                     {{ trans('users.form_control.select.role.label') }}
                    </label>
                    <select id="select_user_role" name="role" data-placeholder=" {{ trans('users.form_control.select.role.placeholder') }}" class="custom-select w-100 @error('name') is-invalid @enderror">
+                    @if (old('role'))
+                    <option value="{{ old('role')->id }}" selected>
+                        {{ old('role')->name }}
+                    </option>
+                    @endif
                    </select>
                    @error('role')
                    <span class="invalid-feedback">
@@ -51,7 +56,7 @@
                    <label for="input_user_email" class="font-weight-bold">
                     {{ trans('users.form_control.input.email.label') }}
                    </label>
-                   <input id="input_user_email" value="" name="email" type="email" class="form-control @error('email') is-invalid @enderror" placeholder=" {{ trans('users.form_control.input.email.placeholder') }}"
+                   <input id="input_user_email" value="{{ old('email') }}" name="email" type="email" class="form-control @error('email') is-invalid @enderror" placeholder=" {{ trans('users.form_control.input.email.placeholder') }}"
                       autocomplete="email" />
                       @error('email')
                       <span class="invalid-feedback">
