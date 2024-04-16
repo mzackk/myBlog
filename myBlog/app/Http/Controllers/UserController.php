@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -31,7 +32,23 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(),[
+            "name" => "required|string|max:30",
+            "role" => "required",
+            "email" => "required|email|unique:users,email",
+            "password" => "required|min:6|confirmed"
+        ],
+        [],
+        $this->attributes()
+    );
+    if ($validator->fails()) {
+        return redirect()
+            ->back()
+            ->withInput($request->all())
+            ->withErrors($validator);
+    }
+
+    dd("ETST", $request->all());
     }
 
     /**
@@ -64,5 +81,15 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         //
+    }
+
+    private function attributes()
+    {
+        return[
+            "name" => trans('users.form_control.input.name.attribute'),
+            "role" => trans('users.form_control.select.role.attribute'),
+            "email" => trans('users.form_control.input.email.attribute'),
+            "password" => trans('users.form_control.input.password.attribute'),
+        ];
     }
 }
