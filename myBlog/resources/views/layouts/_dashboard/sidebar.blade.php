@@ -14,7 +14,7 @@
              {{ trans('dashboard.menu.master') }}
           </div>
           {{-- link:posts --}}
-          <a class="nav-link {{ set_active(['posts.index', 'posts.create', 'posts.edit']) }}" 
+          <a class="nav-link {{ set_active(['posts.index', 'posts.create', 'posts.edit']) }}"
             href="{{ route('posts.index') }}">
              <div class="sb-nav-link-icon">
                 <i class="far fa-newspaper"></i>
@@ -22,7 +22,7 @@
              {{ trans('dashboard.link.posts') }}
           </a>
           {{-- link:categories --}}
-          <a class="nav-link {{ set_active(['categories.index', 'categories.create', 'categories.edit','categories.show']) }}" 
+          <a class="nav-link {{ set_active(['categories.index', 'categories.create', 'categories.edit','categories.show']) }}"
             href="{{ route('categories.index') }}">
              <div class="sb-nav-link-icon">
                 <i class="fas fa-bookmark"></i>
@@ -43,7 +43,7 @@
              {{ trans('dashboard.menu.user_permission') }}
           </div>
           {{-- Link:Users --}}
-          <a class="nav-link {{ set_active(['users.index','users.create']) }}" 
+          <a class="nav-link {{ set_active(['users.index','users.create', 'users.edit']) }}"
           href="{{ route('users.index') }}">
              <div class="sb-nav-link-icon">
                 <i class="fas fa-user"></i>
@@ -51,7 +51,7 @@
              {{ trans('dashboard.link.users') }}
           </a>
           {{-- Link:Roles --}}
-          <a class="nav-link {{ set_active(['roles.index', 'roles.show', 'roles.edit' ]) }}" 
+          <a class="nav-link {{ set_active(['roles.index', 'roles.show', 'roles.edit' ]) }}"
             href="{{ route('roles.index') }}">
              <div class="sb-nav-link-icon">
                 <i class="fas fa-user-shield"></i>
