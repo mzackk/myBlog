@@ -100,7 +100,15 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        // Select the role you want to display, such as the first role
+        $roleSelected = $user->roles->first();
+
+        // dd($roleSelected); // Debugging statement
+
+        return view('users.edit', [
+            'user' => $user,
+            'roleSelected' => $roleSelected,
+        ]);
     }
 
     /**
