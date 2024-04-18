@@ -56,6 +56,6 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['web', 'auth']], functio
 
 
     //User
-    Route::resource('/users', \App\Http\Controllers\UserController::class);
+    Route::resource('/users', \App\Http\Controllers\UserController::class)->except(['show']);
 });
 
