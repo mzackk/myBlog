@@ -116,7 +116,22 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $validator = Validator::make($request->all(),[
+            "role" => "required",
+        ],
+        [],
+        $this->attributes()
+    );
+
+    if ($validator->fails()) {
+        $request['role'] = Role::select('id', 'name')->find($request->role);
+        return redirect()
+            ->back()
+            ->withInput($request->all())
+            ->withErrors($validator);
+    }
+
+    dd($request->all());
     }
 
     /**
