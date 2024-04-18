@@ -67,7 +67,7 @@ class UserController extends Controller
         $user->assignRole($role->name);
         Alert::success(
             trans('users.alert.create.title'),
-            trans('users.alert.message.success'),
+            trans('users.alert.create.message.success'),
         );
         return redirect()->route('users.index');
     } catch (\Throwable $th) {
@@ -131,7 +131,30 @@ class UserController extends Controller
             ->withErrors($validator);
     }
 
-    dd($request->all());
+    DB::beginTransaction();
+    try {
+        $role = Role::find($request->role);
+        $user->syncRoles($role->name);
+        Alert::success(
+            trans('users.alert.update.title'),
+            trans('users.alert.update.message.success'),
+        );
+        return redirect()->route('users.index');
+    } catch (\Throwable $th) {
+        DB::rollBack();
+        Alert::error(
+            trans('users.alert.update.title'),
+            trans('users.alert.update.message.error', ['error' => $th->getMessage()])
+        );
+        $request['role'] = Role::select('id', 'name')->find($request->role);
+        return redirect()
+            ->back()
+            ->withInput($request->all())
+            ->withErrors($validator);
+    }
+    finally{
+        DB::commit();
+    }
     }
 
     /**
