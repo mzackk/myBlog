@@ -16,10 +16,18 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        $users = [];
+        if($request->get('keyword')){
+            $users = User::search($request->keyword)->get();
+        }
+        else
+        {
+            $users = User::all();
+        }
         return view('users.index',[
-            'users' => User::all()
+            'users' => $users
         ]);
 
     }
