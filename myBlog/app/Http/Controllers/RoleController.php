@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Spatie\Permission\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -129,7 +130,7 @@ class RoleController extends Controller
         if($validator->fails()){
             return redirect()->back()->withInput($request->all())->withErrors($validator);
         }
-        
+
         DB::beginTransaction();
         try{
             $role->name = $request->name;
@@ -156,6 +157,16 @@ class RoleController extends Controller
      */
     public function destroy(Role $role)
     {
+        //Validation
+        if(User::role($role->name)->count()){
+            Alert::success(
+                trans('roles.alert.delete.title'),
+                trans('roles.alert.delete.message.warning' , ['name' => $role->name]),
+            );
+            return redirect()->route('roles.index');
+        }
+
+        //Deletion Process
         DB::beginTransaction();
         try{
             $role->revokePermissionTo($role->permissions->pluck('name')->toArray());

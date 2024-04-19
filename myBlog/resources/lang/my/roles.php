@@ -74,7 +74,8 @@ return [
             'message' => [
                 'confirm' => "Adakah anda pasti untuk memadam peranan :name?",
                 'success' => "Peranan berjaya dipadam.",
-                'error' => "Ralat berlaku semasa memadam peranan. :error"
+                'error' => "Ralat berlaku semasa memadam peranan. :error",
+                'warning' => "Maaf, peranan :name tidak dapat dipadamkan kerana masih digunakan."
             ]
         ],
     ]
