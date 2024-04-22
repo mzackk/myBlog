@@ -9,13 +9,21 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class TagController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:tag_show', ['only' => 'index']);
+        $this->middleware('permission:tag_create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:tag_update', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:tag_delete', ['only' => 'destroy']);
+    }
+
     private $perPage = 10;
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request)
     {
-        $tags = $request->get('keyword') 
+        $tags = $request->get('keyword')
             ? Tag::search($request->keyword)->paginate($this->perPage)
             : Tag::paginate($this->perPage);
         return view('tags.index', [
@@ -101,7 +109,7 @@ class TagController extends Controller
     {
         Validator::make($request->all(),[
             'title' => 'required|string|max:25',
-            'slug' => 'required|string|unique:tags,slug,' . $tag->id 
+            'slug' => 'required|string|unique:tags,slug,' . $tag->id
         ],
         [],
         $this->getAttributes()
@@ -148,7 +156,7 @@ class TagController extends Controller
                 trans('tags.alert.delete.title'),
                 trans('tags.alert.delete.message.error', ['error' => $th->getMessage()])
             );
-            
+
     }
     return redirect()->back();
 }

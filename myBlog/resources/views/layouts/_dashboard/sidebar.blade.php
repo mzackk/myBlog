@@ -34,13 +34,15 @@
         </a>
           @endcan
           {{-- tags --}}
-          <a class="nav-link {{ set_active(['tags.index', 'tags.create', 'tags.edit']) }}"
-            href="{{ route('tags.index') }}" >
-             <div class="sb-nav-link-icon">
-                <i class="fas fa-tags"></i>
-             </div>
-             Tags
-          </a>
+        @can('manage_tags')
+        <a class="nav-link {{ set_active(['tags.index', 'tags.create', 'tags.edit']) }}"
+        href="{{ route('tags.index') }}" >
+         <div class="sb-nav-link-icon">
+            <i class="fas fa-tags"></i>
+         </div>
+         {{ trans('dashboard.link.tags') }}
+      </a>
+        @endcan
 
           {{-- menu:user permission --}}
           <div class="sb-sidenav-menu-heading">
