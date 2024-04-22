@@ -59,13 +59,15 @@
           </a>
           @endcan
           {{-- Link:Roles --}}
+          @can('manage_roles')
           <a class="nav-link {{ set_active(['roles.index', 'roles.show', 'roles.edit' ]) }}"
-            href="{{ route('roles.index') }}">
-             <div class="sb-nav-link-icon">
-                <i class="fas fa-user-shield"></i>
-             </div>
-             {{ trans('dashboard.link.roles') }}
-          </a>
+          href="{{ route('roles.index') }}">
+           <div class="sb-nav-link-icon">
+              <i class="fas fa-user-shield"></i>
+           </div>
+           {{ trans('dashboard.link.roles') }}
+        </a>
+          @endcan
 
           {{-- menu:Setting --}}
           <div class="sb-sidenav-menu-heading">
