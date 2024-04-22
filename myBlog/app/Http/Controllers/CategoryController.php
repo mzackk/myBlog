@@ -9,6 +9,15 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class CategoryController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('permission:category_show', ['only' => 'index']);
+        $this->middleware('permission:category_create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:category_update', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:category_detail', ['only' => 'show']);
+        $this->middleware('permission:category_delete', ['only' => 'destroy']);
+    }
     /**
      * Display a listing of the resource.
      */
@@ -52,7 +61,7 @@ class CategoryController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {        
+    {
         // validation process categories data
         $validator = Validator::make($request -> all(),[
         'title' => 'required|string|max:60',
@@ -71,18 +80,18 @@ class CategoryController extends Controller
             }
             return redirect()->back()->withInput($request->all())->withErrors($validator);
         }
-            
+
         // insert data categories
         try {
             Category::create([
-                'title' => $request->title, 
-                'slug' => $request->slug, 
-                'thumbnail' => parse_url($request->thumbnail)['path'], 
-                'description' => $request->description, 
+                'title' => $request->title,
+                'slug' => $request->slug,
+                'thumbnail' => parse_url($request->thumbnail)['path'],
+                'description' => $request->description,
                 'parent_id' => $request->parent_category
             ]);
             Alert::success(
-                trans('categories.alert.create.title'), 
+                trans('categories.alert.create.title'),
                 trans('categories.alert.create.message.success') );
             return redirect()->route('categories.index');
 
@@ -92,8 +101,8 @@ class CategoryController extends Controller
 
         }
         Alert::error(
-            trans('categories.alert.create.title'), 
-            trans('categories.alert.create.message.error', ['error' => $th->getMessage()]) 
+            trans('categories.alert.create.title'),
+            trans('categories.alert.create.message.error', ['error' => $th->getMessage()])
             );
         return redirect()->back()->withInput($request->all());
         }
@@ -112,7 +121,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        return view('categories.edit', compact('category')); 
+        return view('categories.edit', compact('category'));
     }
 
     /**
@@ -128,45 +137,45 @@ class CategoryController extends Controller
             ],
             [],
             $this->attribute()
-    
+
         );
-        
-    
+
+
             if($validator->fails()){
                     if($request->has('parent_category')){
                         $request['parent_category'] = Category::select('id','title')->find($request->parent_category);
                 }
                 return redirect()->back()->withInput($request->all());
             }
-                
+
             // update data categories
             try {
                 $category ->update([
-                    'title' => $request->title, 
-                    'slug' => $request->slug, 
-                    'thumbnail' => parse_url($request->thumbnail)['path'], 
-                    'description' => $request->description, 
+                    'title' => $request->title,
+                    'slug' => $request->slug,
+                    'thumbnail' => parse_url($request->thumbnail)['path'],
+                    'description' => $request->description,
                     'parent_id' => $request->parent_category
                 ]);
                 Alert::success(
-                    trans('categories.alert.update.title'), 
+                    trans('categories.alert.update.title'),
                     trans('categories.alert.update.message.success') );
                 return redirect()->route('categories.index');
-    
+
             } catch (\Throwable $th) {
                 if($request->has('parent_category')){
                     $request['parent_category'] = Category::select('id','title')->find($request->parent_category);
-    
+
             }
             Alert::error(
-                trans('categories.alert.update.title'), 
-                trans('categories.alert.update.message.error', ['error' => $th->getMessage()]) 
+                trans('categories.alert.update.title'),
+                trans('categories.alert.update.message.error', ['error' => $th->getMessage()])
                 );
             return redirect()->back()->withInput($request->all());
             }
 
 
-       
+
     }
 
     /**
@@ -177,13 +186,13 @@ class CategoryController extends Controller
         try{
             $category->delete();
             Alert::success(
-                trans('categories.alert.delete.title'), 
+                trans('categories.alert.delete.title'),
                 trans('categories.alert.delete.message.success') );
         }catch (\Throwable $th)
         {
             Alert::error(
-                trans('categories.alert.delete.title'), 
-                trans('categories.alert.delete.message.error', ['error' => $th->getMessage()]) 
+                trans('categories.alert.delete.title'),
+                trans('categories.alert.delete.message.error', ['error' => $th->getMessage()])
                 );
         }
         return redirect()->back();

@@ -19,7 +19,7 @@
                   {{-- Form: search --}}
                    <form action="{{ route('categories.index') }}" method="GET">
                       <div class="input-group">
-                         <input name="keyword" type="search" class="form-control" placeholder="{{ trans('categories.form_control.input.search.placeholder') }}" 
+                         <input name="keyword" type="search" class="form-control" placeholder="{{ trans('categories.form_control.input.search.placeholder') }}"
                                  value="{{ request()->get('keyword') }}">
                          <div class="input-group-append">
                             <button class="btn btn-primary" type="submit">
@@ -30,9 +30,11 @@
                    </form>
                 </div>
                 <div class="col-md-6">
-                   <a href="{{ route('categories.create') }}" class="btn btn-primary float-right" role="button">
-                      {{ trans('categories.button.create.value') }}
-                      <i class="fas fa-plus-square"></i>
+                    @can('category_create')
+                    <a href="{{ route('categories.create') }}" class="btn btn-primary float-right" role="button">
+                        {{ trans('categories.button.create.value') }}
+                        <i class="fas fa-plus-square"></i>
+                    @endcan
                    </a>
                 </div>
              </div>
@@ -63,7 +65,7 @@
                {{ $categories->links('vendor.pagination.bootstrap-4') }}
             </div>
           @else
-              
+
           @endif
 
        </div>
