@@ -137,15 +137,15 @@ class RoleController extends Controller
             $role->syncPermissions($request->permissions);
             $role->save();
             Alert::success(
-                trans('roles.alert.create.title'),
-                trans('roles.alert.create.message.success'),
+                trans('roles.alert.update.title'),
+                trans('roles.alert.update.message.success'),
             );
             return redirect()->route('roles.index');
         } catch(\Throwable $th){
             DB::rollback();
             Alert::error(
-                trans('roles.alert.create.title'),
-                trans('roles.alert.create.message.error', ['error' => $th->getMessage()]),
+                trans('roles.alert.update.title'),
+                trans('roles.alert.update.message.error', ['error' => $th->getMessage()]),
             );
         }finally{
             DB::commit();
