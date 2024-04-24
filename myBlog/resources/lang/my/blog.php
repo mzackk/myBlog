@@ -21,7 +21,7 @@ return [
         ],
     ],
     'menu' => [
-        'home' => "Laman Utama",
+        'home' => "Laman",
         'categories' => "Kategori",
         'tags' => "Tag",
         'dashboard' => 'Papan Pemuka',
