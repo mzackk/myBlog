@@ -18,9 +18,9 @@ Route::get('/localization/{language}', [\App\Http\Controllers\LocalizationContro
 ) -> name('localization.switch');
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+
+Route::get('/', [\App\Http\Controllers\BlogController::class, 'home'])-> name('blog.home');
 
 Auth::routes([
     'register' => false
