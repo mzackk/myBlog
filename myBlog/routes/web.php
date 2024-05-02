@@ -21,6 +21,7 @@ Route::get('/localization/{language}', [\App\Http\Controllers\LocalizationContro
 
 
 Route::get('/', [\App\Http\Controllers\BlogController::class, 'home'])-> name('blog.home');
+Route::get('/categories', [\App\Http\Controllers\BlogController::class, 'showCategories'])-> name('blog.categories');
 
 Auth::routes([
     'register' => false

@@ -29,14 +29,14 @@
              <!-- nav-home:end -->
              <!-- nav-categories:start -->
              <li class="nav-item">
-                <a class="nav-link" href="">
-                   {{ trans('blog.menu.tags') }}
+                <a class="nav-link" href="{{ route('blog.categories') }}">
+                   {{ trans('blog.menu.categories') }}
                 </a>
              </li>
              <!-- nav-categories:tags -->
              <li class="nav-item">
                 <a class="nav-link" href="">
-                   Tags
+                   {{ trans('blog.menu.tags') }}
                 </a>
              </li>
              <!-- nav-tags:end -->
