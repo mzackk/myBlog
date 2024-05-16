@@ -30,4 +30,15 @@ class BlogController extends Controller
             'tags' => Tag::paginate($this->perPage)
         ]);
     }
+
+    public function searchPosts(Request $request)
+    {
+        if (!$request->get('keyword')){
+            return redirect()->route('blog.home');
+        }
+
+        return view('blog.search_post',[
+            'posts' => Post::publish()->search($request->keyword)->paginate($this->perPage)->appends(['keyword' => $request->keyword])
+        ]);
+    }
 }

@@ -29,10 +29,18 @@ Breadcrumbs::for('blog_categories', function (BreadcrumbTrail $trail) {
 
  });
 
- //Blog > Categories
+ //Blog > Tags
 Breadcrumbs::for('blog_tags', function (BreadcrumbTrail $trail) {
     $trail->parent('blog');
     $trail->push('Tags', route('blog.tags'));
+
+ });
+
+  //Blog > Tags
+Breadcrumbs::for('blog_search', function (BreadcrumbTrail $trail, $keyword) {
+    $trail->parent('blog');
+    $trail->push('Search', route('blog.search'));
+    $trail->push($keyword, route('blog.search'));
 
  });
 
