@@ -37,7 +37,7 @@ class BlogController extends Controller
             return redirect()->route('blog.home');
         }
 
-        return view('blog.search_post',[
+        return view('blog.search-post',[
             'posts' => Post::publish()->search($request->keyword)->paginate($this->perPage)->appends(['keyword' => $request->keyword])
         ]);
     }
@@ -69,6 +69,18 @@ class BlogController extends Controller
             'posts' => $posts,
             'tag' => $tag,
             'tags' => $tags
+        ]);
+    }
+
+    public function showPostDetail($slug)
+    {
+        $post = Post::publish()->with(['categories', 'tags'])->where('slug', $slug)->first();
+        if (!$post){
+            return redirect()->route('blog.home');
+        }
+
+        return view('blog.post-detail',[
+            'post' => $post
         ]);
     }
 }
