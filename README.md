@@ -30,7 +30,7 @@ composer install
 
 Copy the `.env.example` file to `.env` and update it with your database credentials, application keys, and other relevant configuration settings.
 
-### Publish File Manager Configuration (Optional)
+### Publish File Manager Configuration
 
 If you intend to use Laravel FileManager for file management, execute the following commands:
 
@@ -45,7 +45,7 @@ php artisan vendor:publish --tag=lfm_public
 php artisan storage:link
 ```
 
-### Generate Application Key (Optional)
+### Generate Application Key
 
 ```bash
 php artisan key:generate
@@ -62,7 +62,7 @@ php artisan key:generate
 php artisan serve
 ```
 
-### Migration and Seeding (Optional)
+### Migration and Seeding
 
 If you have database migrations and seeds defined within the project, you can execute the following commands to apply them:
 
@@ -71,10 +71,6 @@ php artisan migrate
 php artisan db:seed
 ```
 
-## Additional Notes
-
-- This README provides a general overview of the installation and setup process. Refer to the project documentation (if available) for more detailed instructions.
-- Consider creating a `.gitignore` file to manage files or directories that should be excluded from version control.
 
 ## Contributing
 
